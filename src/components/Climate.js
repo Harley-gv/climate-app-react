@@ -25,7 +25,7 @@ function Climate() {
 
       
         navigator.geolocation.getCurrentPosition(success, error,options);
-        console.log('weather',weather?.main?.temp)
+       
         
 
 
