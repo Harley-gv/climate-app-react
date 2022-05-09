@@ -5,7 +5,7 @@ import './Climate.css';
 function Climate() {
 
     const [weather, setWeather] = useState({});
-   let convertir ;
+
     var options = {
         enableHighAccuracy: true,
         timeout: 5000,
@@ -24,7 +24,7 @@ function Climate() {
     useEffect(() => {
 
       
-        navigator.geolocation.getCurrentPosition(success, error);
+        navigator.geolocation.getCurrentPosition(success, error,options);
         console.log('weather',weather?.main?.temp)
         
 
