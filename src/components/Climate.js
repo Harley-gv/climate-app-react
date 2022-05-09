@@ -37,7 +37,7 @@ function Climate() {
                     <li>pressure: {weather?.main?.pressure}</li>
                 </div>
             </div>
-            <p>Temperatura: {Math.round(weather?.main?.temp - 273.15)}°C</p>
+            <p>Temperature: {Math.round(weather?.main?.temp - 273.15)}°C</p>
 
             <button className="convert">
                 convertir a F
