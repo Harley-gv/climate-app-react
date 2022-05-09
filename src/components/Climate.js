@@ -10,28 +10,21 @@ function Climate() {
         enableHighAccuracy: true,
         timeout: 5000,
         maximumAge: 0
-      };
+    };
 
     function success(pos) {
         var crd = pos.coords;
 
         axios.get(`https://api.openweathermap.org/data/2.5/weather?lat=${crd.latitude}&lon=${crd.longitude}&appid=f9d41ea0759acb79c354107f6299624f`)
-            .then(res => setWeather(res.data)).catch(res=>console.log(res));
+            .then(res => setWeather(res.data)).catch(res => console.log(res));
     }
     function error(err) {
         alert(`ERROR(${err.code}): ${err.message}`);
     }
     useEffect(() => {
+        navigator.geolocation.getCurrentPosition(success, error, options);
+    }, [])
 
-      
-        navigator.geolocation.getCurrentPosition(success, error,options);
-       
-        
-
-
-
-    }, []);
- 
 
     return (
         <div className='card-container'>
@@ -39,8 +32,6 @@ function Climate() {
             <div className="card-city">
                 <h2>{weather?.name} , {weather?.sys?.country}</h2>
             </div>
-
-
             <div className="card-description">
                 <div className="card-img">
 
