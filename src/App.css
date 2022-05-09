@@ -1,5 +1,5 @@
 .App {
-  border: solid;
+  background-image: url(./bg.jpg) ;
   display: flex;
   justify-content: center;
   align-items: center;
