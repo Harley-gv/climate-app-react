@@ -5,11 +5,15 @@ import './Climate.css';
 function Climate() {
 
     const [weather, setWeather] = useState({});
+    const [TempK,setTempK] = useState(0)
+    const [TempC,setTempC] = useState(0)
     function success(pos) {
         var crd = pos.coords;
-        axios.get(`https://api.openweathermap.org/data/2.5/weather?lat=${crd.latitude}&lon=${crd.longitude}&appid=f9d41ea0759acb79c354107f6299624f`).then(res => setWeather(res.data))
-        
+        axios.get(`https://api.openweathermap.org/data/2.5/weather?lat=${crd.latitude}&lon=${crd.longitude}&appid=f9d41ea0759acb79c354107f6299624f`).then(res => {setWeather(res.data);setTempK(res.data.main?.temp);setTempC(res.data.main?.temp)})
     }
+
+    console.log(TempK)
+
     function error(err) {
         alert(`ERROR(${err.code}): ${err.message}`);
     }
@@ -18,7 +22,16 @@ function Climate() {
         navigator.geolocation.getCurrentPosition(success, error);
     }, [])
 
-    console.log('cuando se ejecuta')
+    function changeTempFar (){
+        setTempC((TempK - 273.15) * 9/5 + 32)
+    }
+    
+    function changeTempCelcius (){
+        setTempC(TempK - 273.15)
+    }
+    
+
+    //console.log('cuando se ejecuta')
     return (
         <div className='card-container'>
             <h1>Climate App</h1>
@@ -37,10 +50,13 @@ function Climate() {
                     <li>pressure: {weather?.main?.pressure}</li>
                 </div>
             </div>
-            <p>Temperature: {Math.round(weather?.main?.temp - 273.15)}°C</p>
+            <p id='temperature'>Temperature:{Math.round(TempC)}</p>
 
-            <button className="convert">
-                convertir a F
+            <button onClick={changeTempFar} className='btn'>
+                Temperature °F
+            </button>
+            <button onClick={changeTempCelcius} className='btn'>
+                Temperature °C
             </button>
         </div>
     );
