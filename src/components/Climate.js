@@ -5,37 +5,32 @@ import './Climate.css';
 function Climate() {
 
     const [weather, setWeather] = useState({});
-    const [TempK,setTempK] = useState(0)
-    const [TempC,setTempC] = useState(0)
-    function success(pos) {
-        var crd = pos.coords;
-        axios.get(`https://api.openweathermap.org/data/2.5/weather?lat=${crd.latitude}&lon=${crd.longitude}&appid=f9d41ea0759acb79c354107f6299624f`).then(res => {setWeather(res.data);setTempK(res.data.main?.temp);setTempC(res.data.main?.temp - 273.15)})
-    }
-
-    console.log(TempK)
-
-    function error(err) {
-        alert(`ERROR(${err.code}): ${err.message}`);
-    }
-
+    const [TempK, setTempK] = useState(0)
+    const [TempC, setTempC] = useState(0)
+  
     useEffect(() => {
+        function success(pos) {
+            var crd = pos.coords;
+            axios.get(`https://api.openweathermap.org/data/2.5/weather?lat=${crd.latitude}&lon=${crd.longitude}&appid=f9d41ea0759acb79c354107f6299624f`).then(res => { setWeather(res.data); setTempK(res.data.main?.temp); setTempC(res.data.main?.temp - 273.15) })
+        }
+
+        function error(err) {
+            alert(`ERROR(${err.code}): ${err.message}`);
+        }
+
         navigator.geolocation.getCurrentPosition(success, error);
     }, [])
 
 
-     function changeTempCelcius (){
-         setTempC(TempK - 273.15)
-    } 
-
-
-    function changeTempFar (){
-        setTempC(TempC * 9/5 + 32)
+    function changeTempCelcius() {
+        setTempC(TempK - 273.15)
     }
-    
-    
-    
 
-    //console.log('cuando se ejecuta')
+
+    function changeTempFar() {
+        setTempC(TempC * 9 / 5 + 32)
+    }
+
     return (
         <div className='card-container'>
             <h1>Climate App</h1>
