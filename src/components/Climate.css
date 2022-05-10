@@ -14,10 +14,17 @@
 }
 
 .btn {
-    margin: 2px;
+    margin: 5px;
     border-radius: 10em;
+    padding: 0.5rem;
+    border: none;
+    margin-bottom: 1rem;
 }
 
+.btn:hover {
+    color: aliceblue;
+    background-color: chartreuse;
+}
 .card-info {
     display: flex;
     flex-direction: column;
