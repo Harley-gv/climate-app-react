@@ -19,6 +19,7 @@
     padding: 0.5rem;
     border: none;
     margin-bottom: 1rem;
+    cursor: pointer;
 }
 
 .btn:hover {
@@ -31,18 +32,4 @@
     
     justify-content: space-around;
     height: 6.2rem;
-}
-
-.convert {
-    margin: 1em;
-    border-radius: 1em;
-    border: none;
-    color: azure;
-    background-color: black;
-    cursor: pointer;
-}
-
-.convert:hover {
-    color: black;
-    background-color: gray;
 }

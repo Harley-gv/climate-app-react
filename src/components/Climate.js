@@ -7,7 +7,7 @@ function Climate() {
     const [weather, setWeather] = useState({});
     const [TempK, setTempK] = useState(0)
     const [TempC, setTempC] = useState(0)
-  
+
     useEffect(() => {
         function success(pos) {
             var crd = pos.coords;
@@ -49,14 +49,18 @@ function Climate() {
                     <li>pressure: {weather?.main?.pressure}</li>
                 </div>
             </div>
-            <p id='temperature'>Temperature: {Math.round(TempC)}</p>
 
-            <button onClick={changeTempFar} className='btn'>
-                Temperature °F
-            </button>
-            <button onClick={changeTempCelcius} className='btn'>
-                °C
-            </button>
+            
+                <p id='temperature'>Temperature: {Math.round(TempC)}</p>
+
+                <button onClick={changeTempFar} className='btn'>
+                    °F
+                </button>
+                <button onClick={changeTempCelcius} className='btn'>
+                    °C
+                </button>
+            
+
         </div>
     );
 }
