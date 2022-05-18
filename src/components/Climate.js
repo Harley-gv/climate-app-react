@@ -5,13 +5,12 @@ import './Climate.css';
 function Climate() {
 
     const [weather, setWeather] = useState({});
-    const [TempK, setTempK] = useState(0)
     const [TempC, setTempC] = useState(0)
 
     useEffect(() => {
         function success(pos) {
             var crd = pos.coords;
-            axios.get(`https://api.openweathermap.org/data/2.5/weather?lat=${crd.latitude}&lon=${crd.longitude}&appid=f9d41ea0759acb79c354107f6299624f`).then(res => { setWeather(res.data); setTempK(res.data.main?.temp); setTempC(res.data.main?.temp - 273.15) })
+            axios.get(`https://api.openweathermap.org/data/2.5/weather?lat=${crd.latitude}&lon=${crd.longitude}&appid=f9d41ea0759acb79c354107f6299624f`).then(res => { setWeather(res.data); setTempC(res.data.main?.temp - 273.15) })
         }
 
         function error(err) {
@@ -20,16 +19,6 @@ function Climate() {
 
         navigator.geolocation.getCurrentPosition(success, error);
     }, [])
-
-
-    function changeTempCelcius() {
-        setTempC(TempK - 273.15)
-    }
-
-
-    function changeTempFar() {
-        setTempC(TempC * 9 / 5 + 32)
-    }
 
     return (
         <div className='card-container'>
@@ -45,20 +34,13 @@ function Climate() {
                 </div>
                 <div className="card-info">
                     <li>{weather.weather?.[0].description}</li>
-                    <li>humidity: {weather?.main?.humidity}</li>
-                    <li>pressure: {weather?.main?.pressure}</li>
+                    <li>Humedad: {weather?.main?.humidity} G/M³</li>
+                    <li>Presion: {weather?.main?.pressure} Pa</li>
                 </div>
             </div>
 
             
-                <p id='temperature'>Temperature: {Math.round(TempC)}</p>
-
-                <button onClick={changeTempFar} className='btn'>
-                    °F
-                </button>
-                <button onClick={changeTempCelcius} className='btn'>
-                    °C
-                </button>
+                <p id='temperature'>Temperatura: {Math.round(TempC)} °C</p>
             
 
         </div>
